@@ -6,9 +6,10 @@
     <title><%= "some title" %></title>
 </head>
 <body>
-    <h1>Please Log In:</h1>
-    <jsp:include page="login.jsp">
-        <jsp:param name="login" value="login"/>
+
+    <jsp:include page="landing.jsp">
+        <jsp:param name="landing" value="landing"/>
     </jsp:include>
+
 </body>
 </html>
