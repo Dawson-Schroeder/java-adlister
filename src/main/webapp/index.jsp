@@ -9,7 +9,17 @@
 <body>
     <jsp:include page="partials/navbar.jsp" />
     <div class="container">
-        <h1>Welcome to the Adlister!</h1>
+        <div class="row">
+            <div class="column">
+                <h1><a href="/pizza-order.jsp">Order a Pizza</a></h1>
+            </div>
+            <div class="column">
+                <h1><a href="/pickcolor.jsp">Pick a Color</a></h1>
+            </div>
+            <dic class="column">
+                <h1><a href="/guess.jsp">Guessing Game</a></h1>
+            </dic>
+        </div>
     </div>
 </body>
 </html>
