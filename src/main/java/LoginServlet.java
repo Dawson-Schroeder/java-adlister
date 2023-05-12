@@ -16,6 +16,8 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         request.getRequestDispatcher("/login.jsp").forward(request, response);
+        String language = (String) session.getAttribute("language");
+        System.out.println("Language preference: " + language);
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -29,6 +31,4 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect("/login");
         }
     }
-
-
 }
