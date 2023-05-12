@@ -9,7 +9,8 @@
     <jsp:include page="partials/navbar.jsp" />
 
     <div class="container">
-        <h1>Viewing your profile.</h1>
+        <h1>Welcome to your profile, ${username}</h1>
+        <p>Land reference: ${language}</p>
     </div>
 
 </body>
