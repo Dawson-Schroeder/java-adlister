@@ -12,7 +12,8 @@ public class MySQLAdsDao implements Ads {
 
     private Connection connection;
 
-    public MySQLAdsDao(Config config){
+
+    public MySQLAdsDao(){
         try{
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(
@@ -30,7 +31,7 @@ public class MySQLAdsDao implements Ads {
         List<Ad> ads = new ArrayList<>();
         try{
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("SELECT * FROM adlister_db.ads");
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM ads");
             while (resultSet.next()){
                 Ad ad = new Ad(
                         resultSet.getLong("id"),
@@ -50,23 +51,18 @@ public class MySQLAdsDao implements Ads {
     @Override
     public Long insert(Ad ad) {
         try {
-            PreparedStatement statement = connection.prepareStatement(
-                    "INSERT INTO adlister_db.ads (user_id, ads.title, description) VALUES (?, ?, ?)",
-                    Statement.RETURN_GENERATED_KEYS);
-            statement.setLong(1, ad.getUserId());
-            statement.setString(2, ad.getTitle());
-            statement.setString(3, ad.getDescription());
-            statement.executeUpdate();
-            ResultSet rs = statement.getGeneratedKeys();
-            if (rs.next()) {
-                return rs.getLong(1);
-            } else {
-                throw new SQLException("Insertion failed, no ID obtained.");
+            Statement statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO ads (user_id, title, description) VALUES (" + ad.getUserId() + ", '" + ad.getTitle() + "', '" + ad.getDescription() + "')", Statement.RETURN_GENERATED_KEYS);
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if (resultSet.next()) {
+                return resultSet.getLong(1);
             }
-        } catch (SQLException sqlx) {
-            throw new RuntimeException("Error inserting ad into db", sqlx);
+        } catch (SQLException e) {
+            throw new RuntimeException("Exception error ", e);
         }
+        return null;
     }
+
 
     public static void main(String[] args) {
 

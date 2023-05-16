@@ -2,15 +2,16 @@ package dao;
 
 import config.Config;
 
+import java.sql.SQLException;
+
 public class DaoFactory {
     private static Ads adsDao;
 
-    public static Ads getAdsDao() {
+    public static Ads getAdsDao() throws SQLException {
         if (adsDao == null) {
-            adsDao = new ListAdsDao();
+            adsDao = new MySQLAdsDao();
         }
         return adsDao;
     }
-    Config config = new Config("jdbc:mysql://localhost:3306/adlister_db", "adlister", "codeup");
-    MySQLAdsDao dao = new MySQLAdsDao(config);
+
 }
