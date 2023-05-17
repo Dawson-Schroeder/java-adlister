@@ -15,7 +15,7 @@
             </c:when>
             <c:otherwise>
                 <ul class="nav navbar-nav navbar-right">
-                    <p>User not logged in</p>
+                    <li><a href="/login">User not logged in</a></li>
                     <li><a href="/login">Login</a></li>
                 </ul>
             </c:otherwise>

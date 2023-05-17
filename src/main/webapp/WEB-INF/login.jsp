@@ -20,6 +20,12 @@
             </div>
             <input type="submit" class="btn btn-primary btn-block" value="Log In">
         </form>
+        <div class="row">
+            <ul>
+                <h4>Dont have an account?</h4>
+                <li><a href="/ads/register">Create an account</a></li>
+            </ul>
+        </div>
     </div>
 </body>
 </html>

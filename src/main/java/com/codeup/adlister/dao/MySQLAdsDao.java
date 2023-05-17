@@ -27,17 +27,31 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
+//    @Override
+//    public List<Ad> all() {
+//        Statement stmt = null;
+//        try {
+//            stmt = connection.createStatement();
+//            ResultSet rs = stmt.executeQuery("SELECT * FROM ads");
+//            return createAdsFromResults(rs);
+//        } catch (SQLException e) {
+//            throw new RuntimeException("Error retrieving all ads.", e);
+//        }
+//    }
     @Override
     public List<Ad> all() {
-        Statement stmt = null;
+        String query = "SELECT ads.*, users.username " +
+                "FROM ads " +
+                "JOIN users ON ads.user_id = users.id";
         try {
-            stmt = connection.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM ads");
+            PreparedStatement stmt = connection.prepareStatement(query);
+            ResultSet rs = stmt.executeQuery();
             return createAdsFromResults(rs);
         } catch (SQLException e) {
             throw new RuntimeException("Error retrieving all ads.", e);
         }
     }
+
 
     @Override
     public Long insert(Ad ad) {
@@ -56,19 +70,14 @@ public class MySQLAdsDao implements Ads {
         }
     }
 
-//    private String createInsertQuery(Ad ad) {
-//        return "INSERT INTO ads(user_id, title, description) VALUES "
-//            + "(" + ad.getUserId() + ", "
-//            + "'" + ad.getTitle() +"', "
-//            + "'" + ad.getDescription() + "')";
-//    }
 
     private Ad extractAd(ResultSet rs) throws SQLException {
         return new Ad(
             rs.getLong("id"),
             rs.getLong("user_id"),
             rs.getString("title"),
-            rs.getString("description")
+            rs.getString("description"),
+            rs.getString("username")
         );
     }
 
