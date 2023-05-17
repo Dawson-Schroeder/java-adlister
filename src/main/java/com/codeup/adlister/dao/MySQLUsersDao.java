@@ -10,7 +10,7 @@ import java.util.List;
 
 public class MySQLUsersDao implements Users {
 
-    private Connection connection = null;
+    private Connection connection;
 
     public MySQLUsersDao(Config config) {
         try {
